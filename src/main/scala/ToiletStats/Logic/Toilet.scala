@@ -8,8 +8,8 @@ import scala.collection.mutable.ArrayBuffer
 * Game code
 */
 class Toilet(init_deck: ArrayBuffer[Card]) {
-  var working_deck = ArrayBuffer[Card]()
-  var unused_cards = init_deck
+  val working_deck = ArrayBuffer[Card]()
+  val unused_cards = init_deck
 
   def deck = working_deck
 
@@ -27,8 +27,8 @@ class Toilet(init_deck: ArrayBuffer[Card]) {
     // Play a round.
     var did_stuff = true
     while (did_stuff == true) {
-      var same_number = check_same_number()
-      var same_suit = check_same_suit()
+      val same_number = check_same_number()
+      val same_suit = check_same_suit()
 
       did_stuff = (same_suit || same_number)
     }
@@ -50,9 +50,9 @@ class Toilet(init_deck: ArrayBuffer[Card]) {
       return false
     }
 
-    var last_index = working_deck.size - 1
-    var top_card = working_deck(last_index)
-    var fourth_card = working_deck(last_index-3)
+    val last_index = working_deck.size - 1
+    val top_card = working_deck(last_index)
+    val fourth_card = working_deck(last_index-3)
 
     // Check for same number four cards back.
     if (top_card.number == fourth_card.number) {
@@ -73,9 +73,9 @@ class Toilet(init_deck: ArrayBuffer[Card]) {
       return false
     }
 
-    var last_index = working_deck.size - 1
-    var top_card = working_deck(last_index)
-    var fourth_card = working_deck(last_index - 3)
+    val last_index = working_deck.size - 1
+    val top_card = working_deck(last_index)
+    val fourth_card = working_deck(last_index - 3)
 
     // Check for the same suit four cards back.
     if (top_card.suit == fourth_card.suit) {

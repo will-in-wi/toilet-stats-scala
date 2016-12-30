@@ -28,9 +28,12 @@ object GamePlayer {
   }
 
   def main(args: Array[String]): Unit = {
+    // val t0 = System.nanoTime()
     for (i <- 0 until 100000) {
-      var remaining_cards = play_game()
+      val remaining_cards = play_game()
       println(s"$remaining_cards")
     }
+    // val t1 = System.nanoTime()
+    // println("Elapsed time: " + (t1 - t0) + "ns")
   }
 }

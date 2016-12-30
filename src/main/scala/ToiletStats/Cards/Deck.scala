@@ -5,7 +5,7 @@ import scala.collection.mutable.ArrayBuffer
 
 object Deck {
   def generate(): ArrayBuffer[Card] = {
-    var cartesian_product = for (num <- Numbers.numbers; suit <- Suits.suits) yield (new Card(suit, num))
+    val cartesian_product = for (num <- Numbers.numbers; suit <- Suits.suits) yield (new Card(suit, num))
 
     return cartesian_product.to[ArrayBuffer]
   }
