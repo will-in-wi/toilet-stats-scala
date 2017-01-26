@@ -1,28 +1,26 @@
 package ToiletStats.Logic
 
 import ToiletStats.Cards.Card
+import ToiletStats.Cards.Deck
 
 import scala.collection.mutable.ArrayBuffer
 
 /**
 * Game code
 */
-class Toilet(init_deck: ArrayBuffer[Card]) {
-  val working_deck = ArrayBuffer[Card]()
+class Toilet(init_deck: Deck) {
+  val working_deck = new Deck()
   val unused_cards = init_deck
 
   def deck = working_deck
 
   def round(): Boolean = {
-    if (unused_cards.size == 0) {
-      return false
-    }
+    if (unused_cards.size == 0) return false
 
     // Add cards until the deck has at least 4.
     do {
       add_card()
     } while (working_deck.size < 4 && unused_cards.size > 0)
-
 
     // Play a round.
     var did_stuff = true
@@ -50,17 +48,16 @@ class Toilet(init_deck: ArrayBuffer[Card]) {
       return false
     }
 
-    val last_index = working_deck.size - 1
-    val top_card = working_deck(last_index)
-    val fourth_card = working_deck(last_index-3)
+    val top_card = working_deck(working_deck.last_index)
+    val fourth_card = working_deck(working_deck.last_index-3)
 
     // Check for same number four cards back.
     if (top_card.number == fourth_card.number) {
       // Pull the last four cards and discard them.
-      discard_card(last_index)
-      discard_card(last_index-1)
-      discard_card(last_index-2)
-      discard_card(last_index-3)
+      discard_card(working_deck.last_index)
+      discard_card(working_deck.last_index-1)
+      discard_card(working_deck.last_index-2)
+      discard_card(working_deck.last_index-3)
 
       return true
     }

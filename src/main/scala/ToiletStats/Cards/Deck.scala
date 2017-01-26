@@ -4,15 +4,21 @@ package ToiletStats.Cards
 import scala.collection.mutable.ArrayBuffer
 
 object Deck {
-  def generate(): ArrayBuffer[Card] = {
-    val cartesian_product = for (num <- Numbers.numbers; suit <- Suits.suits) yield (new Card(suit, num))
+  def generate(): Deck = {
+    val cartesian_product = for (num <- Numbers.numbers; suit <- Suits.suits) yield (Card(suit, num))
 
-    return cartesian_product.to[ArrayBuffer]
+    return cartesian_product.asInstanceOf[Deck]
   }
+}
 
-  def format(deck: ArrayBuffer[Card]): Unit = {
-    for((card,i) <- deck.zipWithIndex) {
+class Deck extends ArrayBuffer[Card] {
+  def format(): Unit = {
+    for((card,i) <- this.zipWithIndex) {
       println(s"$i => ${card.number.symbol} of ${card.suit.symbol}")
     }
   }
+
+  def last_index = this.size - 1
+  def top_card = this(last_index)
+  def fourth_card = this(last_index-3)
 }
